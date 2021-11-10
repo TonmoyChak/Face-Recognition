@@ -14,5 +14,15 @@ EEG: for measure of facial expression
 Inertial: liveness detection for face authentication
 
 
+# Project Board
+
+To Do: helps to set what we want work on
+
+In Progress: what is still in working
+
+Done: is completed goal
+
+
+
 # Intsructions to run the app
 ![](Instructions_commands.png)
