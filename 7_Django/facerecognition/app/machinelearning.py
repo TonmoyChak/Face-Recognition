@@ -1,32 +1,22 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# # pipeline all models 
-
-# In[1]:
-
-
 import numpy as np
 import cv2
 import sklearn
 import pickle
+from django.conf import settings
+import os
 
-
-# In[2]:
-
+STATIC_DIR = settings.STATIC_DIR
 
 # face detection
-face_detector_model = cv2.dnn.readNetFromCaffe('./models/deploy.prototxt.txt'
-                                               ,'./models/res10_300x300_ssd_iter_140000.caffemodel')
+face_detector_model = cv2.dnn.readNetFromCaffe(os.path.join(STATIC_DIR,'models/deploy.prototxt.txt'),
+                                               os.path.join(STATIC_DIR,'models/res10_300x300_ssd_iter_140000.caffemodel'))
 # # feature extraction
-face_feature_model = cv2.dnn.readNetFromTorch('./models/openface.nn4.small2.v1.t7')
+face_feature_model = cv2.dnn.readNetFromTorch(os.path.join(STATIC_DIR,'models/openface.nn4.small2.v1.t7'))
 # # face recognition 
-face_recogniation_model = pickle.load(open('./models/machinelearning_face_person_identity.pkl',mode ='rb'))
+face_recogniation_model = pickle.load(open(os.path.join(STATIC_DIR,'models/machinelearning_face_person_identity.pkl'),mode ='rb'))
 # # emotion recogniation model
-emotion_recognition_model = pickle.load(open('./models/machinelearning_face_emotion.pkl',mode ='rb'))
+emotion_recognition_model = pickle.load(open(os.path.join(STATIC_DIR,'models/machinelearning_face_emotion.pkl'),mode ='rb'))
 
-
-# In[14]:
 
 
 def pipeline_model(path):   
@@ -74,6 +64,10 @@ def pipeline_model(path):
                 cv2.putText(image,text_face,(startx,starty),cv2.FONT_HERSHEY_PLAIN,2,(255,255,255),2)
                 cv2.putText(image,text_emotion,(startx,endy),cv2.FONT_HERSHEY_PLAIN,2,(255,255,255),2)
                 
+                
+                cv2.imwrite(os.path.join(settings.MEDIA_ROOT,'ml_output/process.jpg'),image)
+                cv2.imwrite(os.path.join(settings.MEDIA_ROOT,'ml_output/roi_{}.jpg'.format(count)),face_roi)
+                
                 maxchinelearning_results['count'].append(count)
                 maxchinelearning_results['face_detect_score'].append(confidence)
                 maxchinelearning_results['face_name'].append(face_name)
@@ -86,12 +80,3 @@ def pipeline_model(path):
                 
                 
     return maxchinelearning_results
-
-
-# In[16]:
-
-
-results = pipeline_model('./data/joe_trump_obama.jpg')
-
-results
-
