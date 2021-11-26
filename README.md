@@ -4,6 +4,9 @@ Face Recognition is the way of identifying or confirming an individul's identity
 Enjoy the App: https://recognitionwebapp0.herokuapp.com/
 
 
+
+![](AppView.png)
+
 # About this Web App
 Sensors Use:
 
