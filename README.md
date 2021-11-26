@@ -7,6 +7,11 @@ Enjoy the App: https://recognitionwebapp0.herokuapp.com/
 
 ![](AppView.png)
 
+
+
+![](AppView2.png)
+
+
 # About this Web App
 Sensors Use:
 
