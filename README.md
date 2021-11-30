@@ -32,6 +32,8 @@ In Progress: what is still in working
 
 Done: is completed goal
 
+# Sensing Pipeline Img
+
 
 
 # Intsructions to run the app
